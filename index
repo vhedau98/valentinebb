@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Just For You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --pink1: #ff758f;
+    --pink2: #ff4d6d;
+    --bg1: #ffdde1;
+    --bg2: #ee9ca7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Floating hearts background */
+.bg-heart {
+    position: absolute;
+    font-size: 16px;
+    opacity: 0.25;
+    animation: floatBg linear infinite;
+}
+
+@keyframes floatBg {
+    0% {
+        transform: translateY(110vh) scale(0.8);
+        opacity: 0;
+    }
+    20% { opacity: 0.4; }
+    100% {
+        transform: translateY(-20vh) scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* Card */
+.card {
+    width: 580px;
+    max-width: 92%;
+    background: rgba(255,255,255,0.96);
+    border-radius: 28px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+    padding: 45px 38px;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+}
+
+/* Progress dots */
+.progress {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    transition: 0.3s;
+}
+
+.dot.active {
+    background: var(--pink2);
+    transform: scale(1.3);
+}
+
+/* Sections */
+.section {
+    display: none;
+    animation: fadeSlide 0.7s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.emoji {
+    font-size: 46px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 14px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Buttons */
+button {
+    margin-top: 24px;
+    padding: 13px 34px;
+    font-size: 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--pink1), var(--pink2));
+    color: #fff;
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(255,77,109,0.45);
+}
+
+button.secondary {
+    background: linear-gradient(135deg, #ffa6c1, #ff7aa2);
+}
+
+/* Polaroid */
+.polaroid {
+    background: #fff;
+    padding: 10px 10px 22px;
+    width: 240px;
+    margin: 18px auto;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+}
+
+.polaroid img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.polaroid span {
+    display: block;
+    margin-top: 8px;
+    font-size: 18px;
+    font-family: 'Dancing Script', cursive;
+    color: #777;
+    cursor: pointer;
+}
+
+/* Hidden love message */
+.secret-love {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.95);
+    padding: 14px 26px;
+    border-radius: 30px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    color: #ff4d6d;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.6s ease;
+    z-index: 20;
+}
+
+.secret-love.show {
+    opacity: 1;
+}
+
+/* Hearts burst */
+.pop-heart {
+    position: absolute;
+    font-size: 26px;
+    animation: pop 3s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes pop {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-320px) scale(1.8);
+        opacity: 0;
+    }
+}
+
+.signature {
+    margin-top: 28px;
+    font-size: 15px;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="secret-love" id="secretLove">
+    I love you. Always have. Always will. 💖
+</div>
+
+<script>
+for (let i = 0; i < 30; i++) {
+    const h = document.createElement("div");
+    h.className = "bg-heart";
+    h.innerHTML = "❤";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (9 + Math.random() * 6) + "s";
+    h.style.fontSize = (14 + Math.random() * 18) + "px";
+    document.body.appendChild(h);
+}
+</script>
+
+<div class="card">
+
+    <div class="progress">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section active">
+        <div class="emoji">💗</div>
+
+        <div class="polaroid" style="transform: rotate(-2deg);">
+            <img src="images/us1.jpg" alt="Us">
+            <span class="secret-trigger">us 💕</span>
+        </div>
+
+        <h1>Helaaaa baubaaaa</h1>
+        <p>
+            I hope you’re having a lovely day, bacchaa.  
+            I made something small, soft, and full of love - just for you.  
+            I really hope you like it. 🥺💖
+        </p>
+        <button onclick="next()">Acha 👀</button>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+        <div class="emoji">💌</div>
+
+        <div class="polaroid" style="transform: rotate(2deg);">
+            <img src="images/us2.jpg" alt="Memory">
+            <span class="secret-trigger">one of my favourites</span>
+        </div>
+
+        <p>
+            You know, pillua… you are truly amazing.  
+            You are special, you are rare, and you are da best. 💖  
+            There are moments when I randomly smile and realise  
+            it’s because you crossed my mind.  
+            I love you so much. You mean the world to me.  
+        </p>
+        <button onclick="next()">Phir? 🥺</button>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+        <div class="emoji">💖</div>
+        <h1>Bubu 😊</h1>
+        <p>
+            On the 14th of February,  
+            I would love to spend some special time with you 
+            to celebrate Valentine’s Day, to celebrate us, and to celebrate our love.  
+            Just you and me, making the day a little more beautiful together.
+        </p>
+        <button onclick="final()">Yes 😊</button>
+        <button class="secondary" onclick="final()">Definitely Yes 💕</button>
+    </div>
+
+    <!-- Final -->
+    <div class="section">
+        <div class="emoji">🥰</div>
+
+        <div class="polaroid" style="transform: rotate(-3deg);">
+            <img src="images/us3.jpg" alt="Always">
+            <span class="secret-trigger">always you</span>
+        </div>
+
+        <p>
+            Knowing you said yes made my heart feel  
+            quietly, deeply, endlessly happy. 💕  
+            Honestly, everything feels more meaningful  
+            when you’re with me.  
+            Alsooo as we are alreadyyy planning somethingggg.  
+            Mazzaaa karuyaa apan, baccha kahi pan apan plan karu tyat.  
+            I love you so much. 💖
+        </p>
+        <div class="signature">
+            — Tumcha idiot pilla 💙
+        </div>
+    </div>
+
+</div>
+
+<script>
+const sections = document.querySelectorAll(".section");
+const dots = document.querySelectorAll(".dot");
+let index = 0;
+
+function next() {
+    sections[index].classList.remove("active");
+    dots[index].classList.remove("active");
+    index++;
+    sections[index].classList.add("active");
+    dots[index].classList.add("active");
+}
+
+function final() {
+    next();
+    popHearts();
+}
+
+function popHearts() {
+    for (let i = 0; i < 24; i++) {
+        const heart = document.createElement("div");
+        heart.className = "pop-heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "0px";
+        heart.style.animationDuration = (2 + Math.random()) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+    }
+}
+
+/* Easter egg trigger */
+document.querySelectorAll(".secret-trigger").forEach(el => {
+    el.addEventListener("click", () => {
+        const msg = document.getElementById("secretLove");
+        msg.classList.add("show");
+        popHearts();
+        setTimeout(() => msg.classList.remove("show"), 3000);
+    });
+});
+</script>
+
+</body>
+</html>
